@@ -11,9 +11,10 @@
     <div class="container">
         <header>
             <h1>Language cards</h1>
+            <div id="test"></div>
         </header>
         <section class="main">
-            <webview id="foo" src="http://classics.mit.edu/Homer/iliad.1.i.html" style="display:inline-flex; width:90%; height:900px"></webview>
+            <webview id="foo" src="http://www.apple.com" style="display:inline-flex; width:90%; height:900px"></webview>
         </section>
         <footer></footer>
     </div>
@@ -21,26 +22,20 @@
 
 <script>
     onload = () => {
-            const wb = document.getElementById('foo')
-            if (wb) {
-                alert('hi')
-            }
+        const webview = document.getElementById('foo')
+        const indicator = document.getElementById('test')
+
+        const loadstart = () => {
+            indicator.innerText = 'loading...'
         }
-        // onload = () => {
-        //     const webview = document.querySelector('foo')
-        //     const indicator = document.querySelector('.indicator')
 
-    //     const loadstart = () => {
-    //         indicator.innerText = 'loading...'
-    //     }
+        const loadstop = () => {
+            indicator.innerText = ''
+        }
 
-    //     const loadstop = () => {
-    //         indicator.innerText = ''
-    //     }
-
-    //     webview.addEventListener('did-start-loading', loadstart)
-    //     webview.addEventListener('did-stop-loading', loadstop)
-    // }
+        webview.addEventListener('did-start-loading', loadstart)
+        webview.addEventListener('did-stop-loading', loadstop)
+    }
 </script>
 
 </html>
