@@ -30,25 +30,28 @@
             console.log("DOM-Ready, triggering events!");
 
             // Aler the scripts src of the website from the <webview>
-            webview.send("request");
+
+            /*webview.send("request");*/
 
             // alert-something
-            webview.send("alert-something", "Hey, i'm alerting this.");
+            webview.send("alert-something", "Double click on any word.");
 
             // change-text-element manipulating the DOM
-            webview.send("change-text-element", {
+            /*webview.send("change-text-element", {
                 id: "myelementID",
                 text: "My text"
-            });
+            });*/
+
         });
 
     // Process the data from the webview
     webview.addEventListener('ipc-message', function(event) {
-        console.log(event);
-        console.info(event.channel);
+        console.log(event.channel);
     });
 
-
+    webview.addEventListener('console-message', function(e) {
+        console.log('from guest: ' + e.type);
+    });
 
 
     onload = () => {}
