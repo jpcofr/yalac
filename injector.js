@@ -1,11 +1,12 @@
 // inyector.js// Get the ipcRenderer of electron
 const { ipcRenderer } = require('electron');
 
-document.addEventListener("click", function(e) {
+document.addEventListener("mouseup", function(e) {
 
-    alert('Body has been clicked!');
+    alert('text has been selected! ' + window.getSelection().toString());
 
 });
+
 
 
 
