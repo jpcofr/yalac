@@ -11,19 +11,18 @@
     <div class="container">
         <header>
             <h1>Language cards</h1>
-            <div id="test"></div>
         </header>
         <section class="main">
-            <webview id="foo" src="http://www.apple.com" style="display:inline-flex; width:90%; height:900px"></webview>
+            <webview id="foo" src="http://classics.mit.edu/Homer/iliad.1.i.html" style="display:inline-flex; width:90%; height:900px"></webview>
         </section>
-        <footer></footer>
+        <footer id="loading"></footer>
     </div>
 </body>
 
 <script>
     onload = () => {
-        const webview = document.getElementById('foo')
-        const indicator = document.getElementById('test')
+				const webview = document.getElementById('foo')
+        const indicator = document.getElementById('loading')
 
         const loadstart = () => {
             indicator.innerText = 'loading...'
@@ -36,6 +35,11 @@
         webview.addEventListener('did-start-loading', loadstart)
         webview.addEventListener('did-stop-loading', loadstop)
     }
+
+		onclick = () => {
+			const {clipboard} = require('electron')
+			console.log(clipboard.readText())
+		}
 </script>
 
 </html>
