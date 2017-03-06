@@ -20,7 +20,8 @@
 </body>
 
 <script>
-    const webview = document.getElementById('foo')
+    const webview = document.getElementById('foo');
+    const http = require('http');
 
     // When everything is ready, trigger the events without problems
     webview.addEventListener("dom-ready",
@@ -46,11 +47,48 @@
 
     // Process the data from the webview
     webview.addEventListener('ipc-message', function(event) {
-        console.log(event.channel);
+
+
+        ///////////
+        http.get('http://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=' + event.channel, (res) => {
+            const statusCode = res.statusCode;
+            const contentType = res.headers['content-type'];
+
+            let error;
+            if (statusCode !== 200) {
+                error = new Error(`Request Failed.\n` +
+                    `Status Code: ${statusCode}`);
+            } else if (!/^application\/json/.test(contentType)) {
+                error = new Error(`Invalid content-type.\n` +
+                    `Expected application/json but received ${contentType}`);
+            }
+            if (error) {
+                console.log(error.message);
+                // consume response data to free up memory
+                res.resume();
+                return;
+            }
+
+            res.setEncoding('utf8');
+            let rawData = '';
+            res.on('data', (chunk) => rawData += chunk);
+            res.on('end', () => {
+                try {
+                    let parsedData = JSON.parse(rawData);
+                    alert(parsedData.results[0].senses[0].definition[0]);
+                    console.log(parsedData);
+                } catch (e) {
+                    console.log(e.message);
+                }
+            });
+        }).on('error', (e) => {
+            console.log(`Got error: ${e.message}`);
+        });
+
     });
 
     webview.addEventListener('console-message', function(e) {
-        console.log('from guest: ' + e.type);
+        console.log('from guest: ' + e.message);
     });
 
 
