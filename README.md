@@ -7,3 +7,4 @@ Yet another language acquisition tool
 - [ ] Create an storage scheme
 - [ ] Get the content from the web for each of the words and store them
 - [x] Use the approach on to get the info from the webview http://ourcodeworld.com/articles/read/201/how-to-send-retrieve-information-and-manipulate-the-dom-from-a-webview-with-electron-framework
+- [ ] Checkout [this](https://www.gwern.net/Spaced%20repetition) and [this wikipedia article](https://en.wikipedia.org/wiki/Incremental_reading) about spaced repetition algorithms.
