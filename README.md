@@ -11,3 +11,4 @@ Yet another language acquisition tool
 
 - [ ] Configure [TypeScript](https://blog.dmbcllc.com/typescript-and-electron-the-right-way/)
 - [ ] Configure [NeDB](http://stackabuse.com/nedb-a-lightweight-javascript-database/)
+- [ ] Check [angularjs](https://infinitescript.com/2016/12/create-a-desktop-app-with-angular-2-and-electron/)
